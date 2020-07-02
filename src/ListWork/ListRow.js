@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './ListRow.css'
 
-var ListRowField = (
-    <div className="work-row">
-        &nbsp;&nbsp;
-        <input type="checkbox"></input>
-        &nbsp; Eat breakfirst
-        <button className="btn btn-danger">Delete</button>
-        <hr></hr>
-    </div>
-);
+class ListRow extends Component {
+    render() {
+        const ListRowField = (
+            <div className="work-row">
+                &nbsp;&nbsp;
+                <input type="checkbox"></input>
+                &nbsp; {this.props.des}
+                <button className="btn btn-danger">Delete</button>
+                <hr></hr>
+            </div>
+        );
 
-function ListRow() {
-    return ListRowField;
+        return ListRowField;
+    }
 }
 
 export default ListRow;
