@@ -1,0 +1,16 @@
+input.form-control{
+    width: 349px;
+    margin-right: 10px;
+    height: 25px;
+    display: inline-block;
+}
+
+.add-work-field{
+    width: 500px;
+}
+
+.add-work-field button{
+    width: 140px;
+    padding: 0;
+    height: 25px;
+}
