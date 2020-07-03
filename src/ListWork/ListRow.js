@@ -11,7 +11,7 @@ class ListRow extends Component {
     }
 
     SendDeleteMessage(index) {
-        alert(index);
+        this.props.deleteWork(index);
     }
 
     render() {

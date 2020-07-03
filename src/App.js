@@ -1,37 +1,55 @@
-import React, { Component } from 'react';
-import './App.css';
-import ListRow from './ListWork/ListRow';
+import React, { Component } from "react";
+import "./App.css";
+import ListRow from "./ListWork/ListRow";
 
 class App extends Component {
   countWork = 0;
+
   constructor(props) {
-    super(props)
-    this.state = { 
+    super(props);
+    this.state = {
       description: "",
-      list: []
-    }
+      list: [],
+    };
+
+    
+  }
+
+  DeleteWork = (index) => {
+    //alert(this);
+    var new_list = this.state.list;
+    new_list.splice(index,1);
+    this.setState({
+      list : new_list
+    })
   }
 
   DescriptionChangeEvent = (event) => {
     this.setState({ description: event.target.value.toString() });
-  }
+  };
 
   AddWorkEvent = (event) => {
     event.preventDefault();
     if (this.state.description !== "") {
-      var row = <ListRow des={this.state.description} index={this.countWork} key={this.countWork}></ListRow>;
+      var row = (
+        <ListRow
+          des={this.state.description}
+          index={this.countWork}
+          key={this.countWork}
+          deleteWork={this.DeleteWork}
+        ></ListRow>
+      );
       this.setState({
         description: "",
-        list: [...this.state.list, row]
+        list: [...this.state.list, row],
       });
 
       this.countWork += 1;
-      document.getElementById('add-work-form').reset();
+      document.getElementById("add-work-form").reset();
+    } else {
+      alert("none description input");
     }
-    else{
-      alert('none description input');
-    }
-  }
+  };
 
   render() {
     return (
@@ -40,17 +58,25 @@ class App extends Component {
         <div className="add-work-field">
           <div className="form-group">
             <form id="add-work-form">
-              <input placeholder="What needs to be done?" className="form-control" onChange={this.DescriptionChangeEvent}></input>
-              <button type="submit" className="btn btn-primary" onClick={this.AddWorkEvent}>Add</button>
+              <input
+                placeholder="What needs to be done?"
+                className="form-control"
+                onChange={this.DescriptionChangeEvent}
+              ></input>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={this.AddWorkEvent}
+              >
+                Add
+              </button>
             </form>
           </div>
         </div>
         <div className="list-work-field">
           <span>TODO LIST</span>
           <hr></hr>
-          <div className="list-work">
-            {this.state.list}
-          </div>
+          <div className="list-work">{this.state.list}</div>
         </div>
       </div>
     );
