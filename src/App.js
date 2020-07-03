@@ -3,6 +3,7 @@ import './App.css';
 import ListRow from './ListWork/ListRow';
 
 class App extends Component {
+  countWork = 0;
   constructor(props) {
     super(props)
     this.state = { 
@@ -18,11 +19,14 @@ class App extends Component {
   AddWorkEvent = (event) => {
     event.preventDefault();
     if (this.state.description !== "") {
-      var row = <ListRow des={this.state.description}></ListRow>
+      var row = <ListRow des={this.state.description} index={this.countWork} key={this.countWork}></ListRow>;
       this.setState({
-        description: this.state.description,
+        description: "",
         list: [...this.state.list, row]
       });
+
+      this.countWork += 1;
+      document.getElementById('add-work-form').reset();
     }
     else{
       alert('none description input');
@@ -35,7 +39,7 @@ class App extends Component {
         {/* Form add new work */}
         <div className="add-work-field">
           <div className="form-group">
-            <form>
+            <form id="add-work-form">
               <input placeholder="What needs to be done?" className="form-control" onChange={this.DescriptionChangeEvent}></input>
               <button type="submit" className="btn btn-primary" onClick={this.AddWorkEvent}>Add</button>
             </form>
