@@ -22,6 +22,8 @@ class App extends Component {
     this.setState({
       list : new_list
     })
+
+    this.countWork -= 1;
   }
 
   DescriptionChangeEvent = (event) => {
