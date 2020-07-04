@@ -11,19 +11,20 @@ class App extends Component {
       description: "",
       list: [],
     };
-
-    
   }
 
-  DeleteWork = (index) => {
-    //alert(this);
+  DeleteWork = (id) => {
     var new_list = this.state.list;
-    new_list.splice(index,1);
-    this.setState({
-      list : new_list
-    })
+    for(var i = 0;i<new_list.length;i++){
+      if(new_list[i].id === id){
+        new_list.splice(i,1);
+        break;
+      }
+    }
 
-    this.countWork -= 1;
+    this.setState({
+      list: new_list
+    })
   }
 
   DescriptionChangeEvent = (event) => {
@@ -33,14 +34,10 @@ class App extends Component {
   AddWorkEvent = (event) => {
     event.preventDefault();
     if (this.state.description !== "") {
-      var row = (
-        <ListRow
-          des={this.state.description}
-          index={this.countWork}
-          key={this.countWork}
-          deleteWork={this.DeleteWork}
-        ></ListRow>
-      );
+      var row = {
+        id: this.countWork,
+        data: this.state.description
+      }
       this.setState({
         description: "",
         list: [...this.state.list, row],
@@ -78,7 +75,18 @@ class App extends Component {
         <div className="list-work-field">
           <span>TODO LIST</span>
           <hr></hr>
-          <div className="list-work">{this.state.list}</div>
+          <div className="list-work">{
+            this.state.list.map((value, index) => {
+              return (
+                <ListRow
+                  des={value.data}
+                  id={value.id}
+                  key={value.id}
+                  deleteWork={this.DeleteWork}
+                ></ListRow>
+              )
+            })
+          }</div>
         </div>
       </div>
     );

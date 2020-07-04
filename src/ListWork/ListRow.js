@@ -6,12 +6,12 @@ class ListRow extends Component {
         super(props);
         this.state = {
             des : props.des,
-            index : props.index
+            id : props.id
         }
     }
 
-    SendDeleteMessage(index) {
-        this.props.deleteWork(index);
+    SendDeleteMessage(id) {
+        this.props.deleteWork(id);
     }
 
     render() {
@@ -20,7 +20,7 @@ class ListRow extends Component {
                 &nbsp;&nbsp;
                 <input type="checkbox"></input>
                 &nbsp; {this.state.des}
-                <button type="button" className="btn btn-danger" onClick={this.SendDeleteMessage.bind(this, this.state.index)}>Delete</button>
+                <button type="button" className="btn btn-danger" onClick={this.SendDeleteMessage.bind(this, this.state.id)}>Delete</button>
                 <hr></hr>
             </div>
         );
